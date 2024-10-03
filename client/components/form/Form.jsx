@@ -2,6 +2,7 @@ import Cloudinary from "../cloudinary/Cloudinary";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { create_char } from "../../redux/action";
+
 function Form() {
     
     const dispatch = useDispatch()
@@ -24,9 +25,13 @@ function Form() {
         gender: "Required",
         origin: "Required",
         location: "Required",
-        image: "Required",
+        image: "",
         });
 
+        useEffect(() => {
+            console.log("Updated character image" , character.image);
+            
+        },[character.image])
 
     const validate = (state, name) => {
         switch(name){
@@ -131,6 +136,27 @@ function Form() {
         }
     }
 
+   
+
+    const disableFunction = () => {
+        // Verificar si algún campo de character está vacío
+        for (const key in character) {
+            if (character[key] === "") {
+                return true;
+            }
+        }
+    
+        // Verificar si existe algún error activo
+        for (const error in errors) {
+            if (errors[error] !== "") {
+                return true; 
+            }
+        }
+    
+        return false; // Si no hay campos vacíos y no hay errores, activar el botón
+    };
+
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setCharacter({
@@ -146,7 +172,50 @@ function Form() {
         console.log("Submitted character: ", character);
         
     }
+
+    const preset_name = import.meta.env.VITE_PRESET_NAME                
+    const cloud_name = import.meta.env.VITE_CLOUD_NAME
     
+    const [image, setImage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const uploadImage = async (e) => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', preset_name)
+
+        setLoading(true)
+
+        try {
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,{
+
+                method: 'POST',
+                body: data
+            }); 
+            const file = await response.json();
+            const imageUrl = file.secure_url
+            setImage(imageUrl);
+            setCharacter((prevCharacter) =>({
+                ...prevCharacter,
+                image: imageUrl
+            }))
+            
+            validate({ ...character, image: imageUrl }, 'image');
+            
+            console.log("url de la imagen", imageUrl);
+            
+            setLoading(false);
+
+        }
+         catch (error) {
+            console.error('Error uploading image:', error);
+            setLoading(false)
+            
+        }
+
+       
+    }
     return(
         <div>
             <form onSubmit={handleSubmit}>
@@ -233,8 +302,22 @@ function Form() {
 
             <br /><br />
 
-            <Cloudinary/>
-            <button type="submit">Create</button>
+            <div>
+                <input type="file"
+                name="file"
+                placeholder="Upload an image"
+                onChange={(e)=>uploadImage(e)}
+                />
+
+                {loading ?  (
+                    <h3>Loading...</h3>
+                ): (
+                    image && <img src={image} alt="imagen"/>
+                )}
+                
+            </div>
+            <button disabled={disableFunction()} type="submit">Create</button>
+            <button type="button" onClick={(e) => setImage("")}>Clear</button>/
             </form>
         </div>
     )
