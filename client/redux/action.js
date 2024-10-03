@@ -2,7 +2,8 @@ import axios from 'axios';
 import { 
     CLEAR_DETAILS,
     GET_ALL_CHARS,
-    GET_CHAR_ID
+    GET_CHAR_ID,
+    CREATE_CHAR
 
  } from "./action-types";
 
@@ -45,6 +46,17 @@ export const clear_details = () => {
             })
         } catch (error) {
             console.log('Error fetching data', error);
+        }
+    }
+}
+
+export const create_char = (character) => {
+    return async function(){
+        try {
+            await axios.post("http://localhost:3001/create", character);
+            alert("Character created")
+        } catch (error) {
+            alert("Error creating character", error.response.data.error)
         }
     }
 }

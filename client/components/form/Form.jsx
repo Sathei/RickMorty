@@ -1,8 +1,10 @@
 import Cloudinary from "../cloudinary/Cloudinary";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { create_char } from "../../redux/action";
 function Form() {
     
+    const dispatch = useDispatch()
     const [character, setCharacter] = useState({
         name: "",
         status: "",
@@ -43,10 +45,10 @@ function Form() {
                 if(state.status === ""){
                     setErrors({...errors, status:"Required"})  
                 } else {
-                    if(state.status !== "Alive" || state.status !== "Dead" || state.status !== "Unknown"){
+                    if(!["Alive", "Dead", "Unknown"].includes(state.status)){
                         setErrors({...errors, status:"Must be a valid status"})
                     } else {
-                        setErrors({...errors, statu:""})
+                        setErrors({...errors, status:""})
                     }
                 }
             }
@@ -81,7 +83,7 @@ function Form() {
                 if(state.gender === "") {
                     setErrors({...errors, gender:"Required"})
                 } else {
-                    if(state.gerder.length < 2 ){
+                    if(state.gender.length < 2 ){
                         setErrors({...errors, gender:"Must be a valid gender"})
                     } else {
                         setErrors({...errors, gender:""})
@@ -135,11 +137,12 @@ function Form() {
             ...character,
             [name]: value
         });
-        validate({...character, [name]:value, name});
+        validate({...character, [name]:value}, name);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        dispatch(create_char(character))
         console.log("Submitted character: ", character);
         
     }
@@ -154,9 +157,9 @@ function Form() {
                 id="name"
                 value={character.name} 
                 onChange={handleChange}/>
-            <br /><br />
-
             <p>{errors.name}</p>
+
+            <br /><br />
 
             <label htmlFor="specie">Specie</label>
             <input
@@ -226,7 +229,7 @@ function Form() {
                 value={character.location}
                 onChange={handleChange}/>
 
-            <p>{errors.location}</p>
+           {errors.location && <p>{errors.location}</p>} 
 
             <br /><br />
 

@@ -14,7 +14,7 @@ const getAllGenre = async() => {
     
         
         currentPage = currentPage + 1
-        console.log(currentPage);
+        
         
     } while (currentPage < lastPage);
     const genresArray = [...genres].map(genre => ({name: genre}));

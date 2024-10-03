@@ -29,22 +29,16 @@ module.exports = (sequelize) => {
         },
         origin: {
             type: DataTypes.JSON,
-            defaultValue: {
-                name: "",
-                url: ""
-            },
             allowNull: false
         },
         location: {
             type: DataTypes.JSON,
-            defaultValue: {
-                name: "",
-                url: ""
-            }
+            allowNull: false
+            
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: false,
+            
         },
         deleted: {
             type: DataTypes.BOOLEAN,

@@ -67,7 +67,7 @@ const createCharacter = async (name, status, specie, type, gender, origin, locat
     });
 
     let genreDB = await Genre.findOne({ where: { name: gender } });
-    let locationDB = await Location.findOne({ where: { name: location.name } });
+    let [locationDB] = await Location.findOrCreate({ where: { name: location } });
 
     if (genreDB) {
         await newChar.setGenre(genreDB);

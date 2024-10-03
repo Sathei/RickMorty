@@ -13,7 +13,7 @@ const getAllLocation = async() => {
         uniqueLocations.forEach(location => locations.add(location));
 
         currentPage++;
-        console.log(currentPage);
+        
         
     } while (currentPage < lastPage);
 
