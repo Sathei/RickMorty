@@ -4,7 +4,7 @@ import {
     GET_ALL_CHARS,
     GET_CHAR_ID,
     LOGIN_REQUEST,
-    LOGIN_SUCESS,
+    LOGIN_SUCCESS,
     LOGIN_FAILED
 
  } from "./action-types";
@@ -57,7 +57,7 @@ export const login_request = () => ({
 })
 
 export const login_success = (userData) => ({
-    type: LOGIN_SUCESS,
+    type: LOGIN_SUCCESS,
     payload: userData
 })
 
@@ -78,7 +78,7 @@ export const create_char = (character) => {
     }
 }
 
-export const create_user = (user) => {
+export const login_user = (user) => {
     return async function (dispatch) {
 
         dispatch(login_request());
@@ -86,7 +86,7 @@ export const create_user = (user) => {
             const response = await axios.post("http://localhost:3001/login", user);
 
             const {token, userId} = response.data;
-            dispatch({token, userId});
+            dispatch(login_success({token, userId}));
             alert('Login succesfully');
         } catch (error) {
             const errorMsg = error.response && error.response.data && error.response.data.error ? error.response.data.error
@@ -94,4 +94,8 @@ export const create_user = (user) => {
             alert(`Failed loging in: ${errorMsg}`)
         }
     }
+}
+
+export const login_user_google = () => {
+
 }

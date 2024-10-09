@@ -5,5 +5,5 @@ export const CREATE_CHAR = 'CREATE_CHAR';
 export const LOGIN = 'LOGIN';
 export const REGISTER = 'REGISTER';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCESS ='LOGIN_SUCCESS';
+export const LOGIN_SUCCESS ='LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';

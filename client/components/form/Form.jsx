@@ -226,7 +226,7 @@ function Form() {
                 id="name"
                 value={character.name} 
                 onChange={handleChange}/>
-            <p>{errors.name}</p>
+            {errors.name && <p>{errors.name}</p>}
 
             <br /><br />
 
@@ -238,7 +238,7 @@ function Form() {
                 value={character.specie}
                 onChange={handleChange}/>
                 
-            <p>{errors.specie}</p>
+            {errors.specie && <p>{errors.specie}</p>}
 
             <br /><br />
             
@@ -250,7 +250,7 @@ function Form() {
                 value={character.gender}
                 onChange={handleChange}/>
             
-            <p>{errors.gender}</p>
+            {errors.gender && <p>{errors.gender}</p>}
 
             <br /><br />
 
@@ -262,7 +262,7 @@ function Form() {
                 value={character.origin}
                 onChange={handleChange}/>
 
-            <p>{errors.origin}</p>
+            {errors.status && <p>{errors.origin}</p>}
 
             <br /><br />
 
@@ -274,7 +274,7 @@ function Form() {
                 value={character.status}
                 onChange={handleChange}/>
 
-            <p>{errors.status}</p>
+            {errors.status && <p>{errors.status}</p>}
             
             <br /><br />
 
@@ -286,7 +286,7 @@ function Form() {
                 value={character.type}
                 onChange={handleChange}/>
 
-            <p>{errors.type}</p>
+            {errors.type && <p>{errors.location}</p>}
 
             <br /><br />
 

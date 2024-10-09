@@ -1,10 +1,16 @@
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
+    const navigate = useNavigate()
     const handleSucess = (credentialResponse) => {
         console.log("Funciono el login", credentialResponse);
+
+        navigate('/home');
+        
     }
 
     const handleError = () => {

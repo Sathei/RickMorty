@@ -28,7 +28,7 @@ const loginHandler = async (req, res) => {
             res.status(401).json({error})
         }
 
-        res.status(200).json('Login Succeed', token, userId)
+        res.status(200).json({message:'Login Succeed', token, userId})
     } catch (error) {
         res.status(500).json({error:'Error loggign in'})        
     }
