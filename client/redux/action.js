@@ -3,7 +3,9 @@ import {
     CLEAR_DETAILS,
     GET_ALL_CHARS,
     GET_CHAR_ID,
-    CREATE_CHAR
+    LOGIN_REQUEST,
+    LOGIN_SUCESS,
+    LOGIN_FAILED
 
  } from "./action-types";
 
@@ -50,6 +52,21 @@ export const clear_details = () => {
     }
 }
 
+export const login_request = () => ({
+    type: LOGIN_REQUEST
+})
+
+export const login_success = (userData) => ({
+    type: LOGIN_SUCESS,
+    payload: userData
+})
+
+export const login_failed = (error) => ({
+    type: LOGIN_FAILED,
+    payload: error
+})
+
+
 export const create_char = (character) => {
     return async function(){
         try {
@@ -57,6 +74,24 @@ export const create_char = (character) => {
             alert("Character created")
         } catch (error) {
             alert("Error creating character", error.response.data.error)
+        }
+    }
+}
+
+export const create_user = (user) => {
+    return async function (dispatch) {
+
+        dispatch(login_request());
+        try {
+            const response = await axios.post("http://localhost:3001/login", user);
+
+            const {token, userId} = response.data;
+            dispatch({token, userId});
+            alert('Login succesfully');
+        } catch (error) {
+            const errorMsg = error.response && error.response.data && error.response.data.error ? error.response.data.error
+            : 'Error logging in'
+            alert(`Failed loging in: ${errorMsg}`)
         }
     }
 }

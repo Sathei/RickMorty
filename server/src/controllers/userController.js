@@ -28,7 +28,8 @@ const login = async (name, password) => {
     if(!isMatch) return console.log('Invalida username or password');
 
     const token = jwt.sign({userId: user.id}, JWT_SECRET, {expiresIn: '1h'});
-
+    console.log(token);
+    
     return { token, userId: user.id}
     
 }

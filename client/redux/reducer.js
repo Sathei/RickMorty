@@ -1,7 +1,10 @@
 import { 
     GET_ALL_CHARS,
     GET_CHAR_ID,
-    CLEAR_DETAILS
+    CLEAR_DETAILS,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGIN_FAILED
 
  } from "./action-types";
 
@@ -9,6 +12,9 @@ const initialState = {
     allCharacters: [],
     allCharactersBackup: [],
     character: {},
+    loading: false,
+    user: null,
+    error: null,
 
 }
 
@@ -32,6 +38,28 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 character: {}
+            }
+
+        case LOGIN_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case LOGIN_SUCCESS: 
+            return {
+                ...state,
+                loading: false,
+                user: action.payload,
+                error: null
+            }
+
+        case LOGIN_FAILED: 
+            return {
+                ...state,
+                loading: false,
+                user: null,
+                error: action.payload
             }
 
         default: 
