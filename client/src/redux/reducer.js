@@ -4,7 +4,8 @@ import {
     CLEAR_DETAILS,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    SEARCH
 
  } from "./action-types";
 
@@ -12,6 +13,7 @@ const initialState = {
     allCharacters: [],
     allCharactersBackup: [],
     character: {},
+    results: [],
     loading: false,
     user: null,
     error: null,
@@ -26,6 +28,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allCharacters: [...action.payload],
                 allCharactersBackup: action.payload,
+                results:[]
             }
         case GET_CHAR_ID:
 
@@ -60,6 +63,12 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 user: null,
                 error: action.payload
+            }
+        
+        case SEARCH:
+            return {
+                ...state,
+                results: action.payload
             }
 
         default: 

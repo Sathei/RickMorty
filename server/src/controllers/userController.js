@@ -20,17 +20,16 @@ const register = async (name, password) => {
 const login = async (name, password) => {
     const user = await User.findOne({where: {name}});
 
-    if(!user) return console.log('Invalid username or password');
+    if(!user) return {error: 'Invalid username or password'};
     
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if(!isMatch) return console.log('Invalida username or password');
+    if(!isMatch) return {error: 'Invalid username or password'};
 
     const token = jwt.sign({userId: user.id}, JWT_SECRET, {expiresIn: '1h'});
-    console.log(token);
     
-    return { token, userId: user.id}
+    return { token, userId: user.id, name: user.name}
     
 }
 

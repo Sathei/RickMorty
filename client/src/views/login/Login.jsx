@@ -3,7 +3,7 @@ import Login from '../../components/login/login';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login_user, login_user_google } from '../../redux/action'; 
+import { login_user } from '../../redux/action'; 
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,10 +13,7 @@ function LoginPage () {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { userOk, error }  = useSelector(state => ({
-        userOk: state.user,
-        error: state.error
-    }))
+    
     const [user, setUser] = useState({
         name: '',
         password: ''
@@ -77,11 +74,15 @@ function LoginPage () {
         return false;
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        dispatch(login_user(user))
-        console.log("User logged succesfully", user.name);
-        
+        const success = dispatch(login_user(user)); 
+        if (success) {
+            alert("User logged successfully", user.name);
+            navigate('/home'); 
+        } else {
+            alert('User does not exist or password is incorrect');
+        }
     }
 
     const handleChange = (event) => {
@@ -93,9 +94,7 @@ function LoginPage () {
         validate({...user, [name]: value}, name)
     }    
 
-    if(userOk) {
-        navigate('/home');
-    }
+    
 return (
 
     <GoogleOAuthProvider clientId="274288050393-fnt12s3pdl4tnjpd7oioqsvhdvmq5pmp.apps.googleusercontent.com">

@@ -3,10 +3,10 @@ const { getAllCharacters, getCharacterById, getCharacterByName, createCharacter,
 const getAllCharactersHandler = async (req, res) => {
     try {
         const characters = await getAllCharacters();
-        res.status(200).json(characters);
+        return res.status(200).json(characters);
     } catch (error) {
         console.error(error);
-        res.status(400).json({error: error.message})
+        return res.status(400).json({error: error.message})
     }
 }
 
@@ -15,11 +15,11 @@ const getCharacterByIdHandler = async (req, res) => {
     if(!idChar) return  res.status(400).json({message: 'Id is required'})
     try {
         const character = await getCharacterById(idChar);
-        res.status(200).json(character);
+        return res.status(200).json(character);
             
     } catch (error) {
         console.error(error);
-        res.status(500).json("There's no character with that ID");
+        return res.status(500).json("There's no character with that ID");
     }
 }
 
@@ -32,7 +32,7 @@ const getCharacterByNameHandler = async (req, res) => {
         return res.status(200).json(results)
     } catch (error) {
         console.error(error);
-        res.status(500).json("Character not found");
+        return res.status(500).json("Character not found");
     }
 }
 
@@ -41,10 +41,10 @@ const createCharHandler = async (req, res) => {
 
     try {
         const character = await createCharacter(name, status, specie, type, gender, origin, location, image)
-        res.status(201).json(character);
+        return res.status(201).json(character);
     } catch (error) {
         console.log(error);
-        res.status(400).json({error: error.message});
+        return res.status(400).json({error: error.message});
     }
 }
 
@@ -52,11 +52,11 @@ const deleteCharHandler = async (req, res) => {
     const { id } = req.body
     try {
         deleteCharacter(id);
-        res.status(200).json(`Character with id ${id} deleted.`)
+        return res.status(200).json(`Character with id ${id} deleted.`)
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error:error.message})
+        return res.status(500).json({error:error.message})
     }    
 }
 

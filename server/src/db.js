@@ -28,7 +28,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Character, Genre, Location } = sequelize.models;
+const { User, Character, Genre, Location } = sequelize.models;
 
 Character.belongsTo(Location, { foreignKey: 'locationId' });
 Location.hasMany(Character, { foreignKey: 'locationId' });

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Form from "../components/form/Form";
+import Form from './components/form/Form'
 
 //* Components *//
 
-import Home from "../views/home/Home";
-import Detail from "../views/detail/Detail";
-import LoginPage from "../views/login/Login";
-import Cloudinary from "../components/cloudinary/Cloudinary";
-import Register from "../views/register/Register";
+import Home from "./views/home/Home";
+import Detail from "./views/detail/Detail"
+import LoginPage from "./views/login/Login";
+import Cloudinary from "./components/cloudinary/Cloudinary";
+import Register from "./views/register/Register";
 
 function App() {
   return (

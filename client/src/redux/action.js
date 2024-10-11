@@ -5,9 +5,12 @@ import {
     GET_CHAR_ID,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    SEARCH
 
  } from "./action-types";
+ 
+
 
 export const get_all_chars = () => {
     return async function(dispatch){
@@ -80,22 +83,58 @@ export const create_char = (character) => {
 
 export const login_user = (user) => {
     return async function (dispatch) {
-
         dispatch(login_request());
+
+       
+
         try {
+
             const response = await axios.post("http://localhost:3001/login", user);
 
-            const {token, userId} = response.data;
-            dispatch(login_success({token, userId}));
-            alert('Login succesfully');
+            const { token, userId, name } = response.data;
+            const userData = { token, userId, name };
+            console.log( 'funcion login action' , userData);
+            
+            localStorage.setItem('user', JSON.stringify(userData));
+
+            dispatch(login_success(userData));
+
+            return true;
         } catch (error) {
-            const errorMsg = error.response && error.response.data && error.response.data.error ? error.response.data.error
-            : 'Error logging in'
-            alert(`Failed loging in: ${errorMsg}`)
+            const errorMsg = error.response && error.response.data && error.response.data.error
+                ? error.response.data.error
+                : error.message;
+            dispatch(login_failed(errorMsg));
+            return false;
+        }
+    };
+};
+
+
+export const register_user = (user) => {
+    return async function(){
+        try {
+            await axios.post('http://localhost:3001/register', user)
+            alert('User signed in succesfully')
+        } catch (error) {
+            console.error('Error signing in', error);
+            
         }
     }
 }
 
-export const login_user_google = () => {
-
+export const searchChar = (name) => {
+    return async function(dispatch) {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/characters/search?name=${name}`)
+            console.log('resultados', data);
+            dispatch({
+                type: SEARCH,
+                payload: data
+            })
+            
+        } catch (error) {
+            console.error('Error searching characters' , error);
+        }
+    }
 }

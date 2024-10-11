@@ -24,7 +24,7 @@ const getCharacterById = async (idChar) => {
         
         console.log(idChar, 'ID CHAR');
         const { data } = await axios(`${urlId}/${idChar}`)
-        console.log(data, ' esto es data');
+       
         const character = {
             idChar,
             name: data.name,
@@ -46,10 +46,11 @@ const getCharacterByName = async (name) => {
 console.log(name, "nombre");
     const { data } = await axios(`${urlId}?name=${name}`)
 
-    const characters = data.results.map(({id, name, status}) => ({
+    const characters = data.results.map(({id, name, status, image}) => ({
         id,
         name,
-        status
+        status,
+        image
     }))
     return characters
 }
