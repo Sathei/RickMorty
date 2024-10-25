@@ -13,11 +13,11 @@ function Home () {
     const allCharacters = useSelector((state) => state.allCharacters);
     const searchResults = useSelector((state) => state.results);
     const dispatch = useDispatch();
-    console.log( 'data usuario' , user);
+    
 
 
     const navigate = useNavigate();
-    const { userOk, error }  = useSelector(state => ({
+    const { userOk }  = useSelector(state => ({
         userOk: state.user,
         error: state.error
     }))

@@ -1,10 +1,11 @@
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from '../../components/login/login';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login_user } from '../../redux/action'; 
 import { useNavigate } from 'react-router-dom';
+import './Login.css'
 
 
 
@@ -95,51 +96,63 @@ function LoginPage () {
     }    
 
     
-return (
+    return (
+        <GoogleOAuthProvider clientId="274288050393-fnt12s3pdl4tnjpd7oioqsvhdvmq5pmp.apps.googleusercontent.com">
+            <div className="cont h-screen flex justify-center items-center">
+                <div className="container cont-login mx-auto w-1/3 h-4/6 rounded-lg bg-black p-8 flex flex-col justify-center items-center">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
 
-    <GoogleOAuthProvider clientId="274288050393-fnt12s3pdl4tnjpd7oioqsvhdvmq5pmp.apps.googleusercontent.com">
-
-        <h1>login</h1>
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="user"><p>User:</p></label>
-                <input 
-                    type="text"
-                    name='name'
-                    id='user'
-                    value={user.name}
-                    onChange={handleChange}
+                <div className='flex flex-col items-center justify-center w-full mb-4'>
+                    <label htmlFor="user" className='mb-2'>
+                        <p>User:</p>
+                    </label>
+                    <input
+                        type="text"
+                        name="name"
+                        id="user"
+                        value={user.name}
+                        onChange={handleChange}
+                        className="p-2 w-full rounded-md text-emerald-900"
                     />
+                    {errors.name && <p className="text-red-500 pt-2">{errors.name}</p>}
+                </div>
 
-                {errors.name && <p>{errors.name}</p>}
+        
+            <div className='flex flex-col items-center justify-center w-full mb-4'>
+                <label htmlFor="password" className='mb-2'>
+                    <p>Password:</p>
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={user.password}
+                    onChange={handleChange}
+                    className="p-2 w-full rounded-md text-emerald-900"
+                />
+                {errors.password && <p className="text-red-500 pt-2">{errors.password}</p>}
+                </div>
 
-                    <br /><br />
-
-                <label htmlFor="password"><p>Contraseña:</p></label>
-                <input 
-                type="password"
-                name="password"
-                id='password'
-                value={user.password}
-                onChange={handleChange}
-                 />
-
-                 {errors.password && <p>{errors.password}</p>}
-
-                 <br /><br />
-
-                <button disabled={disableFunction()} type="submit">Log in</button>
-                <Link to='/register' >
-                    <button >Sign up</button>
+        
+            <div className="flex flex-row gap-4 justify-center items-center mt-4">
+                <button disabled={disableFunction()} type="submit" className="bg-green-700 text-white p-2 rounded">
+                    Log in
+                </button>
+                <Link to="/register">
+                    <button className="bg-gray-500 text-white p-2 rounded">
+                        Sign up
+                    </button>
                 </Link>
-
-            </form>
+            </div>
+                    </form>
+    
+            <div className="mt-6">
+                <Login />
+            </div>
         </div>
-        <Login/>
-
-    </GoogleOAuthProvider>
-
-)
+    </div>
+        </GoogleOAuthProvider>
+    );
 }
 
 export default LoginPage

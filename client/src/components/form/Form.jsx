@@ -1,7 +1,8 @@
-import Cloudinary from "../cloudinary/Cloudinary";
+
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { create_char } from "../../redux/action";
+import './Form.css'
 
 function Form() {
     
@@ -131,6 +132,8 @@ function Form() {
                     }
                 }
             }
+            break;
+
             default:
                 break;
         }
@@ -216,111 +219,136 @@ function Form() {
 
        
     }
-    return(
-        <div>
-            <form onSubmit={handleSubmit}>
+    return (
+      <div className="bg-red-700">
+    
+          <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name:</label>
             <input
-                type="text"
-                name="name"
-                id="name"
-                value={character.name} 
-                onChange={handleChange}/>
+              type="text"
+              name="name"
+              id="name"
+              value={character.name}
+              onChange={handleChange}
+            />
             {errors.name && <p>{errors.name}</p>}
 
-            <br /><br />
+            <br />
+            <br />
 
             <label htmlFor="specie">Specie</label>
             <input
-                type="text"
-                name="specie"
-                id="specie"
-                value={character.specie}
-                onChange={handleChange}/>
-                
+              type="text"
+              name="specie"
+              id="specie"
+              value={character.specie}
+              onChange={handleChange}
+            />
+
             {errors.specie && <p>{errors.specie}</p>}
 
-            <br /><br />
-            
+            <br />
+            <br />
+
             <label htmlFor="gender">Gender</label>
             <input
-                type="text"
-                name="gender"
-                id="gender"
-                value={character.gender}
-                onChange={handleChange}/>
-            
+              type="text"
+              name="gender"
+              id="gender"
+              value={character.gender}
+              onChange={handleChange}
+            />
+
             {errors.gender && <p>{errors.gender}</p>}
 
-            <br /><br />
+            <br />
+            <br />
 
             <label htmlFor="origin">Origin</label>
             <input
-                type="text"
-                name="origin"
-                id="origin"
-                value={character.origin}
-                onChange={handleChange}/>
+              type="text"
+              name="origin"
+              id="origin"
+              value={character.origin}
+              onChange={handleChange}
+            />
 
             {errors.status && <p>{errors.origin}</p>}
 
-            <br /><br />
+            <br />
+            <br />
 
             <label htmlFor="status">Status</label>
             <input
-                type="text"
-                name="status"
-                id="status"
-                value={character.status}
-                onChange={handleChange}/>
+              type="text"
+              name="status"
+              id="status"
+              value={character.status}
+              onChange={handleChange}
+            />
 
             {errors.status && <p>{errors.status}</p>}
-            
-            <br /><br />
+
+            <br />
+            <br />
 
             <label htmlFor="type">Type</label>
             <input
-                type="text"
-                name="type"
-                id="type"
-                value={character.type}
-                onChange={handleChange}/>
+              type="text"
+              name="type"
+              id="type"
+              value={character.type}
+              onChange={handleChange}
+            />
 
             {errors.type && <p>{errors.location}</p>}
 
-            <br /><br />
+            <br />
+            <br />
 
             <label htmlFor="location">Location</label>
             <input
-                type="text"
-                name="location"
-                id="location"
-                value={character.location}
-                onChange={handleChange}/>
+              type="text"
+              name="location"
+              id="location"
+              value={character.location}
+              onChange={handleChange}
+            />
 
-           {errors.location && <p>{errors.location}</p>} 
+            {errors.location && <p>{errors.location}</p>}
 
-            <br /><br />
+            <br />
+            <br />
 
             <div>
-                <input type="file"
+              <input
+                type="file"
                 name="file"
                 placeholder="Upload an image"
-                onChange={(e)=>uploadImage(e)}
-                />
+                onChange={(e) => uploadImage(e)}
+              />
 
-                {loading ?  (
-                    <h3>Loading...</h3>
-                ): (
-                    image && <img src={image} alt="imagen"/>
-                )}
-                
+              {loading ? (
+                <h3>Loading...</h3>
+              ) : (
+                image && <img src={image} alt="imagen" />
+              )}
             </div>
-            <button disabled={disableFunction()} type="submit">Create</button>
-            <button type="button" onClick={(e) => setImage("")}>Clear</button>/
-            </form>
-        </div>
-    )
+            <button disabled={disableFunction()} type="submit">
+              Create
+            </button>
+            <br />
+            <button
+              type="button"
+              className=""
+              onClick={() => setImage("")}
+            >
+              Clear
+            </button>
+          </form>
+     </div>
+      
+    );
 }
 
 export default Form;

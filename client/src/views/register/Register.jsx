@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register_user } from "../../redux/action";
+
+import './register.css';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,12 @@ const Register = () => {
           setErrors({ ...errors, name: "Required" });
         } else {
           if (state.name.length < 3) {
-            setErrors({ ...errors, name: "Must have at least 3 caracters" });
+            setErrors({ ...errors, name: "Must have at least 3 characters" });
           } else {
             if (state.name.length > 12) {
               setErrors({
                 ...errors,
-                name: "Must have less than 12 caracters",
+                name: "Must have less than 12 characters",
               });
             } else {
               setErrors({ ...errors, name: "" });
@@ -44,7 +45,7 @@ const Register = () => {
           setErrors({ ...errors, password: "Required" });
         } else {
           if (state.password.length < 3) {
-            setErrors({ ...errors, password: "Must have than 3 caracters" });
+            setErrors({ ...errors, password: "Must have than 3 characters" });
           } else {
             setErrors({ ...errors, password: "" });
           }
@@ -61,6 +62,7 @@ const Register = () => {
         if(newUser[key] === ""){
             return true;
         }
+        
     }
 
     for(const error in errors) {
@@ -84,39 +86,46 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(register_user(newUser))
-    console.log("Signed in succesfully", newUser);
+    console.log("Signed in successfully", newUser);
     navigate('/login');
   }
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-            type="text"
-            name="name"
-            id="name" 
-            value={newUser.name}
-            onChange={handleChange}
-        />
+    <div className="body bg-slate-800 h-screen flex items-center">
+        
+            <div className="container cont-register flex flex-col p-2 justify-center mx-auto w-1/3 h-4/6 rounded-xl  text-white">
+                <form onSubmit={handleSubmit} className="flex flex-col items-center">
+                  <div className="flex flex-col">
+                      <label className="mb-3" htmlFor="name">Name:</label>
+                      <input
+                          type="text"
+                          name="name"
+                          id="name" 
+                          value={newUser.name}
+                          onChange={handleChange}
+                          className=" w-full rounded-lg text-black p-2"
+                      />
 
-        {errors.name && <p>{errors.name}</p>}
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input
-            type="password"
-            name="password"
-            id="password"
-            value={newUser.password}
-            onChange={handleChange}
-        />
+                      {errors.name && <p className="mt-3 p-1  content-center text-red-600 bg-black bg-opacity-70 rounded-lg">{errors.name}</p>}
+                  <br />
+                  <label className="mb-3" htmlFor="password">Password:</label>
+                  <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      value={newUser.password}
+                      onChange={handleChange}
+                      className=" w-full rounded-lg text-black p-2"
+                      />
 
-        {errors.password && <p>{errors.password}</p>}
+                  {errors.password && <p className="mt-3 p-1 content-center text-red-600 bg-black bg-opacity-70 rounded-lg">{errors.password}</p>}
 
-        <br />
-        <button disabled={disableFunction()} type="submit">Sign in</button>
-      </form>
+                  </div>
+                  <br />
+                  <button className=" btn-sign bg-green-600  w-1/5 p-1 rounded-lg " disabled={disableFunction()} type="submit">Sign in</button>
+                </form>
+            </div>
+        
     </div>
   );
 };

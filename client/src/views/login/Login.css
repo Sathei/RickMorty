@@ -1,0 +1,16 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.cont{
+    /* background: rgb(0,87,27);
+    background: radial-gradient(circle, rgba(0,87,27,1) 34%, rgba(12,156,57,1) 59%, rgba(0,0,0,1) 100%); */
+    background-image: url('https://wallpapers.com/images/high/funny-rick-and-morty-4k-oxsk3s9wpsshe7ai.webp');
+    background-size: cover;
+    background-position: right;
+}
+
+.cont-login{
+    background: rgba(0, 0, 0, 0.5) ;
+    color: white;
+}

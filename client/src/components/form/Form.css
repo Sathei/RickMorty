@@ -1,0 +1,29 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div{
+    padding: 0px;
+    margin: 0px;
+    background-color: cornflowerblue;
+    border: solid, 1px, black;
+}
+.cont {
+
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 700px;
+    margin: 10px auto;
+    padding: 10px;
+    border: solid 2px black;
+    border-radius: 10px;
+} */

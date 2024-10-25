@@ -1,0 +1,20 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+.body{
+    background-image: url('https://wallpapers.com/images/high/rick-and-morty-1920x1080-mb46c6aagrkeaqkl.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.cont-register{
+    background-color: rgba(0,0,0,0.7);
+}
+
+ .btn-sign:hover{
+    background: #008e3d;
+    cursor: pointer
+}

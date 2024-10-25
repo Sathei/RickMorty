@@ -11,21 +11,22 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.7.2",
+    "@react-oauth/google": "^0.12.1",
+    "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.0",
+    "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.0",
-    "pg": "^8.11.5",
+    "nodemon": "^3.1.7",
+    "pg": "^8.13.0",
     "pg-hstore": "^2.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.4"
   }
 }
