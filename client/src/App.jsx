@@ -11,6 +11,7 @@ import Detail from "./views/detail/Detail"
 import LoginPage from "./views/login/Login";
 import Cloudinary from "./components/cloudinary/Cloudinary";
 import Register from "./views/register/Register";
+import Loading from "./views/loading/loading";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Navigate to='/home' />} />
+        <Route path="/loading" element={<Loading/>}/>
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/detail/:id" element={<Detail />} />

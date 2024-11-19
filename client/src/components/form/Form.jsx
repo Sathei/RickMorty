@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { create_char } from "../../redux/action";
 import './Form.css'
+import Loading from "../../views/loading/loading";
 
 function Form() {
     
@@ -29,10 +30,16 @@ function Form() {
         image: "",
         });
 
+    const [loaded, setLoaded] = useState(false);
+
         useEffect(() => {
-            console.log("Updated character image" , character.image);
-            
-        },[character.image])
+            const loadContent = async () => {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                setLoaded(true);
+            };
+
+            loadContent();
+        },[])
 
     const validate = (state, name) => {
         switch(name){
@@ -41,7 +48,7 @@ function Form() {
                 setErrors({...errors, name:"Required"})  
             } else {
                 if(state.name.length < 5){
-                    setErrors({...errors, name:"Must have more than 5 caracters"})
+                    setErrors({...errors, name:"Must have more than 5 characters"})
                 } else {
                     setErrors({...errors, name:""})
                 }
@@ -139,24 +146,20 @@ function Form() {
         }
     }
 
-   
-
-    const disableFunction = () => {
-        // Verificar si algún campo de character está vacío
+    const disableFunction = () => {     
         for (const key in character) {
             if (character[key] === "") {
                 return true;
             }
         }
     
-        // Verificar si existe algún error activo
         for (const error in errors) {
             if (errors[error] !== "") {
                 return true; 
             }
         }
     
-        return false; // Si no hay campos vacíos y no hay errores, activar el botón
+        return false;
     };
 
 
@@ -211,25 +214,26 @@ function Form() {
             setLoading(false);
 
         }
-         catch (error) {
+        catch (error) {
             console.error('Error uploading image:', error);
             setLoading(false)
             
         }
 
-       
     }
     return (
-      <div className="bg-red-700">
-    
-          <form onSubmit={handleSubmit}>
+        <div className="bg-red-700">
+        {!loaded ? (
+            <Loading/>
+        ) : (
+            <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name:</label>
             <input
-              type="text"
-              name="name"
-              id="name"
-              value={character.name}
-              onChange={handleChange}
+                type="text"
+                name="name"
+                id="name"
+                value={character.name}
+                onChange={handleChange}
             />
             {errors.name && <p>{errors.name}</p>}
 
@@ -238,11 +242,11 @@ function Form() {
 
             <label htmlFor="specie">Specie</label>
             <input
-              type="text"
-              name="specie"
-              id="specie"
-              value={character.specie}
-              onChange={handleChange}
+                type="text"
+                name="specie"
+                id="specie"
+                value={character.specie}
+                onChange={handleChange}
             />
 
             {errors.specie && <p>{errors.specie}</p>}
@@ -252,11 +256,11 @@ function Form() {
 
             <label htmlFor="gender">Gender</label>
             <input
-              type="text"
-              name="gender"
-              id="gender"
-              value={character.gender}
-              onChange={handleChange}
+                type="text"
+                name="gender"
+                id="gender"
+                value={character.gender}
+                onChange={handleChange}
             />
 
             {errors.gender && <p>{errors.gender}</p>}
@@ -266,11 +270,11 @@ function Form() {
 
             <label htmlFor="origin">Origin</label>
             <input
-              type="text"
-              name="origin"
-              id="origin"
-              value={character.origin}
-              onChange={handleChange}
+                type="text"
+                name="origin"
+                id="origin"
+                value={character.origin}
+                onChange={handleChange}
             />
 
             {errors.status && <p>{errors.origin}</p>}
@@ -280,11 +284,11 @@ function Form() {
 
             <label htmlFor="status">Status</label>
             <input
-              type="text"
-              name="status"
-              id="status"
-              value={character.status}
-              onChange={handleChange}
+                type="text"
+                name="status"
+                id="status"
+                value={character.status}
+                onChange={handleChange}
             />
 
             {errors.status && <p>{errors.status}</p>}
@@ -294,11 +298,11 @@ function Form() {
 
             <label htmlFor="type">Type</label>
             <input
-              type="text"
-              name="type"
-              id="type"
-              value={character.type}
-              onChange={handleChange}
+                type="text"
+                name="type"
+                id="type"
+                value={character.type}
+                onChange={handleChange}
             />
 
             {errors.type && <p>{errors.location}</p>}
@@ -308,11 +312,11 @@ function Form() {
 
             <label htmlFor="location">Location</label>
             <input
-              type="text"
-              name="location"
-              id="location"
-              value={character.location}
-              onChange={handleChange}
+                type="text"
+                name="location"
+                id="location"
+                value={character.location}
+                onChange={handleChange}
             />
 
             {errors.location && <p>{errors.location}</p>}
@@ -321,33 +325,34 @@ function Form() {
             <br />
 
             <div>
-              <input
-                type="file"
-                name="file"
-                placeholder="Upload an image"
-                onChange={(e) => uploadImage(e)}
-              />
+                <input
+                    type="file"
+                    name="file"
+                    placeholder="Upload an image"
+                    onChange={(e) => uploadImage(e)}
+                />
 
-              {loading ? (
-                <h3>Loading...</h3>
-              ) : (
+                {loading ? (
+                    <h3>Loading...</h3>
+                ) : (
                 image && <img src={image} alt="imagen" />
-              )}
+                )}
             </div>
             <button disabled={disableFunction()} type="submit">
-              Create
+                Create
             </button>
             <br />
             <button
-              type="button"
-              className=""
-              onClick={() => setImage("")}
+                type="button"
+                className=""
+                onClick={() => setImage("")}
             >
-              Clear
-            </button>
-          </form>
-     </div>
-      
+                    Clear
+                </button>
+            </form>
+        )
+    }
+    </div>  
     );
 }
 

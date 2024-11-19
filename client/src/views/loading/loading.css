@@ -1,0 +1,35 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.image-fond{
+    background-image: url('../../../spooky-rick-morty-wallpapers-v0-jq6ji6nw6pxb1.webp');
+    background-size: cover;
+}
+
+.loading-bar-container {
+    width: 100vw;
+    max-width: 400px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0;
+    background-color:rgba(26, 210, 69, 1) ;
+    animation: loader 2s both;
+    border-radius: 8px;
+}
+
+@keyframes loader {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
