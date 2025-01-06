@@ -5,18 +5,31 @@ const url = "https://rickandmortyapi.com/api/character";
 const urlId = "https://rickandmortyapi.com/api/character/";
 
 
+
 const getAllCharacters = async () => {
-    const { data } = await axios(`${url}`)
-    const characters = data.results.map((character) => ({
-        id: character.id,
-        name: character.name,
-        status: character.status,
-        species: character.species,
-        type: character.type,
-        gender: character.gender,
-        image: character.image
-    }))
-    return characters;
+    let count = Math.ceil(826/20);
+    let currentPage = 1;
+    let maxPage = count
+    let allCharacters = [];
+
+    while (currentPage <= maxPage) {
+        const { data } = await axios(`${url}/?page=${currentPage}`);
+        const characters = data.results.map((character) => ({
+            id: character.id,
+            name: character.name,
+            status: character.status,
+            species: character.species,
+            type: character.type,
+            gender: character.gender,
+            image: character.image,
+        }));
+
+        allCharacters = [...allCharacters, ...characters];
+        console.log("currentPage:", currentPage, "maxPage:", maxPage);
+        currentPage++;
+    }
+        
+    return allCharacters;
 }
 
 const getCharacterById = async (idChar) => {
@@ -24,7 +37,7 @@ const getCharacterById = async (idChar) => {
         
         console.log(idChar, 'ID CHAR');
         const { data } = await axios(`${urlId}/${idChar}`)
-       
+
         const character = {
             idChar,
             name: data.name,

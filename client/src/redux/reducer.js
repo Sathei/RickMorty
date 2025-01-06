@@ -7,7 +7,7 @@ import {
     LOGIN_FAILED,
     SEARCH
 
- } from "./action-types";
+} from "./action-types";
 
 const initialState = {
     allCharacters: [],
@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
             }
         case GET_CHAR_ID:
 
+            // eslint-disable-next-line no-case-declarations
             const characterData = action.payload
             return {
                 ...state,

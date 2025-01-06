@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Cards from '../../components/cards/Cards'
 import Loading from "../loading/loading";
+import Pagination from "../../components/pagination/Pagination";
 import { get_all_chars, login_success } from "../../redux/action";
 import Navbar from "../../components/nav/Nav";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +58,7 @@ function Home () {
     const userName = savedUserData ? savedUserData.name: null;
     
     return (
-        <div>
+        <div className="w-full">
             {loaded
                 ?(
                     !userName
@@ -74,6 +75,7 @@ function Home () {
                                     <h2>Welcome {userName}</h2>
                                     <Navbar/>
                                     <Cards allCharacters={characterToDisplay}/>
+                                    <Pagination/>
                                 </>
                             )
                 )       

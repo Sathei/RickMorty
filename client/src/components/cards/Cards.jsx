@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Card from "../card/Card";
-import styles from "./Cards.module.css"
+import "./Cards.css"
 
 function Cards({ allCharacters }) {
     const characterList = allCharacters;
     return (
-        <div className={styles.cards}>
+        <div className="cards p-2">
             {characterList?.map((character) => (
                 <Link to={`/detail/${character.id}`} key={character.id}>
                     <Card character={character} />

@@ -8,8 +8,8 @@ import {
     LOGIN_FAILED,
     SEARCH
 
- } from "./action-types";
- 
+} from "./action-types";
+
 
 
 export const get_all_chars = () => {

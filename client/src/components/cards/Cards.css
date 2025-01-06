@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-*::-webkit-scrollbar {
-    display: none;
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4, 2fr);
+    grid-gap: 10px 
 }
