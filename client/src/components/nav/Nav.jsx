@@ -1,35 +1,34 @@
 import Searchbar from '../searchBar/SearchBar';
-import Button from '../button/Button'
+import Button from '../button/Button';
 import useAuth from '../hooks/useAuth';
 import Filters from '../filters/filters';
-
-function Navbar () {
-
+import './nav.css'
+function Navbar() {
     const userLogged = localStorage.getItem('user');
-    
-    
-
     const { logout } = useAuth();
+
     return (
-        <div className='flex items-center justify-between w-full px-6 py-3 bg-gradient-to-r from-blue-700 to-purple-950'>
-            <div className='flex-1 flex justify-start m-2'>
+        <div className="navbar-container">
+            {/* Filtros alineados a la izquierda */}
+            <div className="filters-container">
                 <Filters />
             </div>
 
-            <div className='flex-1 flex justify-center'>
-                <div className='w-full max-w-md'>
-                    <Searchbar />
-                </div>
+            {/* Barra de búsqueda centrada */}
+            <div className="searchbar-container">
+                <Searchbar />
             </div>
 
-            <div className='flex-1 flex justify-end'>
-                { userLogged
-                    ? <Button link={'/login'} text={'Log out'} onClick={logout}/>
-                    : <Button link={'/login'} text={'Log in'}/>
-                } 
+            {/* Botón de Log in / Log out alineado a la derecha */}
+            <div className="auth-container">
+                {userLogged ? (
+                    <Button link={'/login'} text={'Log out'} onClick={logout} className="button-auth" />
+                ) : (
+                    <Button link={'/login'} text={'Log in'} className="button-auth" />
+                )}
             </div>
         </div>
     );
 }
 
-export default Navbar
+export default Navbar;

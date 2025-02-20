@@ -25,7 +25,7 @@ export default function Pagination() {
     return (
         <div className="mt-4 bg-gradient-to-r from-blue-700 to-purple-950">
                 <button
-                    className="px-4 py-2 mx-1 border rounded"
+                    className="px-4 py-2 mx-1 border rounded boton-pag"
                     onClick={() => handlePage(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
@@ -35,8 +35,8 @@ export default function Pagination() {
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button
                         key={index + 1}
-                        className={`px-4 py-2 mx-1 border rounded ${
-                            currentPage === index + 1 ? "bg-blue-500 text-white" : ""
+                        className={`px-4 py-2 mx-1 border rounded boton-pag ${
+                            currentPage === index + 1 ? "active" : ""
                         }`}
                         onClick={() => handlePage(index + 1)}
                     >
@@ -45,7 +45,7 @@ export default function Pagination() {
                 ))}
 
                 <button
-                    className="px-4 py-2 mx-1 border rounded"
+                    className="px-4 py-2 mx-1 border rounded boton-pag"
                     onClick={() => handlePage(currentPage + 1)}
                     disabled={currentPage === totalPages}
                 >

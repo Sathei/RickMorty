@@ -2,3 +2,18 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.boton-pag {
+    background-color: black;
+    color: white;
+}
+
+.boton-pag:hover {
+    background-color: cornflowerblue;
+}
+
+.boton-pag.active {
+    background-color: rgb(59, 130, 246); /* Equivalente a Tailwind bg-blue-500 */
+    color: white;
+    font-weight: bold;
+    border: 2px solid white;
+}
