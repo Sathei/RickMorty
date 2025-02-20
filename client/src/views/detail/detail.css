@@ -1,3 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.bg-custom-cyan {
+    background-color: #46C2CB;
+}
+.bg-custom-cyan:hover {
+    background-color: #34A0A4;
+}

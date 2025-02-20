@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { searchChar, get_all_chars } from "../../redux/action";
+import { searchChar, get_all_chars, setPage } from "../../redux/action";
 
 function Searchbar() {
     const dispatch = useDispatch();
@@ -10,6 +10,7 @@ function Searchbar() {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(searchChar(character));
+        dispatch(setPage(1));
     };
 
     const handleChange = (event) => {
@@ -22,10 +23,11 @@ function Searchbar() {
         setCharacter('');
         setEmpty(true);
         dispatch(get_all_chars());
+        dispatch(setPage(1));
     };
 
     return (
-        <div className="flex justify-end w-full mt-3 mb-3 max-h-20">
+        <div className="flex justify-center w-full mt-3 mb-3 max-h-20">
             <form onSubmit={handleSubmit} className="flex items-center w-2/3 max-w-md mr-2">
                 <input
                     type="text"

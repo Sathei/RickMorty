@@ -24,8 +24,7 @@ const getAllCharacters = async () => {
             image: character.image,
         }));
 
-        allCharacters = [...allCharacters, ...characters];
-        console.log("currentPage:", currentPage, "maxPage:", maxPage);
+        allCharacters = [...allCharacters, ...characters];  
         currentPage++;
     }
         

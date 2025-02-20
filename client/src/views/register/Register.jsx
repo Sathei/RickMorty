@@ -90,7 +90,7 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const success = await dispatch(register_user(newUser)); // 
+    const success = dispatch(register_user(newUser)); // 
     if (success) {
       console.log("Signed up successfully", newUser);
       navigate('/login');

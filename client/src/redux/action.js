@@ -6,7 +6,10 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAILED,
-    SEARCH
+    SEARCH,
+    SET_PAGE,
+    SET_CHAR,
+    SET_FILTERS
 
 } from "./action-types";
 
@@ -69,6 +72,16 @@ export const login_failed = (error) => ({
     payload: error
 })
 
+export const setPage = (page) => ({
+    type: SET_PAGE,
+    payload: page
+})
+
+export const setChar = (characters) => ({
+    type: SET_CHAR,
+    payload: characters
+})
+
 
 export const create_char = (character) => {
     return async function(){
@@ -124,17 +137,32 @@ export const register_user = (user) => {
 }
 
 export const searchChar = (name) => {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
-            const { data } = await axios.get(`http://localhost:3001/characters/search?name=${name}`)
-            console.log('resultados', data);
+            let allResults = [];
+            let currentPage = 1;
+            let url = `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${name}`;
+            
+            while (url) {
+                const { data } = await axios(url);
+                
+                allResults = [...allResults, ...data.results];
+
+                url = data.info?.next || null;
+            }
+
             dispatch({
                 type: SEARCH,
-                payload: data
-            })
-            
+                payload: allResults
+            });
+
         } catch (error) {
-            console.error('Error searching characters' , error);
+            console.error("Error fetching search results", error);
         }
-    }
-}
+    };
+};
+
+export const setFilters = (filters) => ({
+    type: SET_FILTERS,
+    payload: filters
+})

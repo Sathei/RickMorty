@@ -9,7 +9,7 @@ function Cards({ allCharacters }) {
         <div className="cards p-2">
             {characterList?.map((character) => (
                 <Link to={`/detail/${character.id}`} key={character.id}>
-                    <Card character={character} />
+                        <Card character={character} />
                 </Link>
             ))}
         </div>
